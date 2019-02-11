@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Sdi1105LabSpringApplication {
 
 	public static void main(String[] args) {
-		//tytt
+		//tyttty
 		SpringApplication.run(Sdi1105LabSpringApplication.class, args);
 	}
 
