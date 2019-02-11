@@ -22,6 +22,14 @@ public class MarksController {
 		return "mark/add";
 	}
 
+	@Controller
+	public class HomeController {
+		@RequestMapping("/")
+		public String index() {
+			return "index";
+		}
+	}
+
 	@RequestMapping("/mark/list")
 	public String getList(Model model) {
 		model.addAttribute("markList", marksService.getMarks());
