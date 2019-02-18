@@ -1,5 +1,7 @@
 package com.uniovi.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,9 @@ public class MarksController {
 
 	@Autowired
 	private UsersService usersService;
+
+	@Autowired
+	private HttpSession httpSession;
 
 	@RequestMapping("/mark/list/update")
 	public String updateList(Model model) {
