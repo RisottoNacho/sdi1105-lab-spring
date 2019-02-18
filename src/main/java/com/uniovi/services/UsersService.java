@@ -28,6 +28,11 @@ public class UsersService {
 		usersRepository.findAll().forEach(users::add);
 		return users;
 	}
+	
+	public User getUserByDni(String dni) {
+		return usersRepository.findByDni(dni);
+		}
+
 
 	public User getUser(Long id) {
 		return usersRepository.findById(id).get();
@@ -38,9 +43,6 @@ public class UsersService {
 		usersRepository.save(user);
 	}
 
-	public User getUserByDni(String dni) {
-		return usersRepository.findByDni(dni);
-	}
 
 	public void deleteUser(Long id) {
 		usersRepository.deleteById(id);
