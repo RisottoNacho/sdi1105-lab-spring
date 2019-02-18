@@ -1,7 +1,14 @@
 package com.uniovi.entities;
 
-import javax.persistence.*;
 import java.util.Set; //A collection that contains no duplicate elements
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class User {
@@ -33,7 +40,15 @@ public class User {
 	public long getId() {
 		return id;
 	}
-
+	
+	public void setRole(String role) {
+		this.role = role;
+		}
+	
+	public String getRole() {
+		return role;
+		}
+	
 	public String getPassword() {
 		return password;
 	}
