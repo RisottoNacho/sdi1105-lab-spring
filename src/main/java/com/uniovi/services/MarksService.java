@@ -9,7 +9,7 @@ import java.util.Set;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.security.core.Authentication;
@@ -27,12 +27,12 @@ public class MarksService {
 
 	@Autowired
 	private HttpSession httpSession;
-
+/*
 	public List<Mark> getMarks() {
 		List<Mark> marks = new ArrayList<Mark>();
 		marksRepository.findAll().forEach(marks::add);
 		return marks;
-	}
+	}*/
 
 	public Page<Mark> getMarksForUser(Pageable pageable, User user) {
 		Page<Mark> marks = new PageImpl<Mark>(new LinkedList<Mark>());

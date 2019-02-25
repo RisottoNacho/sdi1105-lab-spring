@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Controller;
@@ -54,6 +54,7 @@ public class MarksController {
 		} else {
 			marks = marksService.getMarksForUser(pageable, user);
 		}
+		model.addAttribute("page", marks);
 		model.addAttribute("markList", marks.getContent());
 		return "mark/list";
 	}
