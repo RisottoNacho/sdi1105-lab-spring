@@ -1,4 +1,4 @@
-package com.uniovi;
+package com.uniovi.tests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
