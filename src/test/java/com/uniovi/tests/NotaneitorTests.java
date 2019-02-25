@@ -18,7 +18,7 @@ public class NotaneitorTests {
 
 	// En Windows (Debe ser la versión 65.0.1 y desactivar las actualizacioens
 	// automáticas)):
-	static String PathFirefox64 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+	static String PathFirefox64 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
 	static String Geckdriver022 = "C:\\Users\\uo258014\\Desktop\\sesion5\\PL-SDI-Sesion5-material\\geckodriver024win64.exe";
 	// En MACOSX (Debe ser la versión 65.0.1 y desactivar las actualizacioens
 	// automáticas):
@@ -53,6 +53,7 @@ public class NotaneitorTests {
 	static public void begin() {
 	}
 
+
 	// Al finalizar la última prueba
 	@AfterClass
 	static public void end() {
@@ -62,6 +63,6 @@ public class NotaneitorTests {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 	}
 }
