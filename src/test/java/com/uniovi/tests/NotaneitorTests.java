@@ -2,7 +2,9 @@ package com.uniovi.tests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -10,12 +12,21 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
+import com.uniovi.entities.Mark;
+import com.uniovi.entities.User;
+import com.uniovi.repositories.UsersRepository;
+import com.uniovi.services.RolesService;
+import com.uniovi.services.UsersService;
 import com.uniovi.tests.pageobjects.PO_HomeView;
 import com.uniovi.tests.pageobjects.PO_LoginView;
 import com.uniovi.tests.pageobjects.PO_PrivateView;
@@ -25,13 +36,23 @@ import com.uniovi.tests.pageobjects.PO_View;
 import com.uniovi.tests.utils.SeleniumUtils;
 
 //Ordenamos las pruebas por el nombre del método
+//Ordenamos las pruebas por el nombre del método
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class NotaneitorTests {
 
+	@Autowired
+	private UsersService usersService;
+	@Autowired
+	private RolesService rolesService;
+	@Autowired
+	private UsersRepository usersRepository;
+	
 	// En Windows (Debe ser la versión 65.0.1 y desactivar las actualizacioens
 	// automáticas)):
-	static String PathFirefox64 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-	static String Geckdriver022 = "E:\\Ignacio\\Documents\\GitHub\\sdi1105-lab-spring\\gecko\\geckodriver024win64.exe";
+	static String PathFirefox64 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
+	static String Geckdriver022 = "C:\\Users\\uo258014\\Desktop\\geckodriver024win64.exe";
 	// En MACOSX (Debe ser la versión 65.0.1 y desactivar las actualizacioens
 	// automáticas):
 	// static String PathFirefox65 =
@@ -48,9 +69,58 @@ public class NotaneitorTests {
 		return driver;
 	}
 
+	public void initdb() {
+		//Borramos todas las entidades.
+		usersRepository.deleteAll();
+		//Ahora las volvemos a crear
+		User user1 = new User("99999990A", "Pedro", "Díaz");
+		user1.setPassword("123456");
+		user1.setRole(rolesService.getRoles()[0]);
+		User user2 = new User("99999991B", "Lucas", "Núñez");
+		user2.setPassword("123456");
+		user2.setRole(rolesService.getRoles()[0]);
+		User user3 = new User("99999992C", "María", "Rodríguez");
+		user3.setPassword("123456");
+		user3.setRole(rolesService.getRoles()[0]);
+		User user4 = new User("99999993D", "Marta", "Almonte");
+		user4.setPassword("123456");
+		user4.setRole(rolesService.getRoles()[1]);
+		User user5 = new User("99999977E", "Pelayo", "Valdes");
+		user5.setPassword("123456");
+		user5.setRole(rolesService.getRoles()[1]);
+		User user6 = new User("99999988F", "Edward", "Núñez");
+		user6.setPassword("123456");
+		user6.setRole(rolesService.getRoles()[2]);
+		Set<Mark> user1Marks = new HashSet<Mark>();
+		for(int i = 1; i <5; i++)
+		 user1Marks.add(new Mark("Nota A"+String.valueOf(i), i*1.0, user1));
+		user1.setMarks(user1Marks);
+		Set<Mark> user2Marks = new HashSet<Mark>();
+		for(int i = 1; i <5; i++)
+		 user2Marks.add(new Mark("Nota A"+String.valueOf(i), i*1.0, user2));
+		user2.setMarks(user2Marks);
+		Set<Mark> user3Marks = new HashSet<Mark>();
+		for(int i = 1; i <8; i++)
+		 user3Marks.add(new Mark("Nota A"+String.valueOf(i), i*1.0, user3));
+		user3.setMarks(user3Marks);
+		Set<Mark> user4Marks = new HashSet<Mark>();
+		for(int i = 1; i <15; i++)
+		 user4Marks.add(new Mark("Nota A"+String.valueOf(i), i*1.0, user4));
+		//OJO que la prueba 15 que trata de borrar esta nota no siempre la encuentra en la
+		user4Marks.add(new Mark("Nota Nueva 1", 9.0, user4));
+		user4.setMarks(user4Marks);
+		usersService.addUser(user1);
+		usersService.addUser(user2);
+		usersService.addUser(user3);
+		usersService.addUser(user4);
+		usersService.addUser(user5);
+		usersService.addUser(user6);
+		}
+
 	// Antes de cada prueba se navega al URL home de la aplicaciónn
 	@Before
 	public void setUp() {
+		initdb();
 		driver.navigate().to(URL);
 	}
 
